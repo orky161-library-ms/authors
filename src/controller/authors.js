@@ -6,11 +6,11 @@ class authorsLogic{
     }
 
     deleteAuthor(id) {
-        return authorDal.deleteAuthor(id)
+        return authorDal.deleteAuthorById(id)
     }
 
     getAuthor(id) {
-        return authorDal.getAuthor(id)
+        return authorDal.getAuthorById(id)
     }
 
     updateAuthor(id, author) {
