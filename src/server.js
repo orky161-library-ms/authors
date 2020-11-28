@@ -1,4 +1,6 @@
 require('dotenv').config("./env");
+const {pool} = require("./config/index")
+const {checkConnectionQuery} = require("./query_builder/queries")
 
 const express = require('express')
 const cors = require('cors')
@@ -14,6 +16,11 @@ app.use("/api/author", authorRoutes)
 
 app.get('/ping', function (req, res) {
     res.status(200).json({msg: "ping"})
+})
+
+app.get('/health', async function (req, res) {
+    await pool.query(checkConnectionQuery)
+    res.status(200).json({msg: "health"})
 })
 
 app.listen(port, () => {

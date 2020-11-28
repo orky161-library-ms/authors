@@ -1,32 +1,33 @@
-const {pool} = require('../config')
+const {pool} = require('../config/index')
+const {
+    addAuthorQuery,
+    deleteAuthorByIdQuery,
+    getAuthorByIdQuery,
+    updateAuthorQuery,
+    getAuthorsQuery,
+} = require("../query_builder/queries")
 
 class authorsDal {
     async addAuthor({name}) {
-        const author = await pool.query('INSERT INTO authors (name) VALUES (?)',
-            [name])
+        const author = await pool.query(addAuthorQuery, [name])
         return author[0].insertId
     }
 
-    deleteAuthor(id) {
-        return pool.query('DELETE FROM authors WHERE id = (?)',
-            [id])
+    deleteAuthorById(id) {
+        return pool.query(deleteAuthorByIdQuery, [id])
     }
 
-    async getAuthor(id) {
-        const author = await pool.query('SELECT * FROM authors WHERE id = (?)',
-            [id])
+    async getAuthorById(id) {
+        const author = await pool.query(getAuthorByIdQuery, [id])
         return author[0][0]
     }
 
     async updateAuthor(id, {name}) {
-        await pool.query('UPDATE authors SET ' +
-                             'name = (?)' +
-                             'WHERE id = (?)',
-            [name, id])
+        await pool.query(updateAuthorQuery, [name, id])
     }
 
     async getAuthors() {
-        const authors = await pool.query('SELECT * FROM authors')
+        const authors = await pool.query(getAuthorsQuery)
         return authors[0]
     }
 }
