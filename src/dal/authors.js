@@ -1,4 +1,4 @@
-const pool = require('../db')
+const {pool} = require('../config')
 
 class authorsDal {
     async addAuthor({name}) {

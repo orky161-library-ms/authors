@@ -3,7 +3,7 @@ require('dotenv').config("./env");
 const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
-const authorRoutes = require("./src/routes/authors")
+const authorRoutes = require("./routes/authors")
 
 const app = express()
 const port = 30002
