@@ -12,6 +12,7 @@ router.get("/", (async (req, res) => {
     res.status(200).json({authors})
 }))
 router.post("/", [auth_mw, permission_mw("ADMIN"), validation_mw(createAuthor)],(async (req, res) => {
+    console.log(req.body)
     const author = await authorsLogic.addAuthor(req.body)
     res.status(201).json({author})
 }))

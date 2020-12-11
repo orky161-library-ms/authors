@@ -1,7 +1,9 @@
 const axios = require("axios")
 
 const auth_mw =  (req, res, next) => {
-    axios.get(`http://${process.env.AUTH_SERVICE}/api/auth/verify`,{headers: req.headers}).then(res =>{
+    console.log(req.headers['x-access-token'])
+    axios.get(`http://${process.env.AUTH_SERVICE}/api/auth/verify`,{headers: {'x-access-token': req.headers['x-access-token']}}).then(res =>{
+        console.log("nn")
         req.decoded = {};
         req.decoded.email = res.data.decoded.email;
         req.decoded.id = res.data.decoded.id;
@@ -17,6 +19,7 @@ const auth_mw =  (req, res, next) => {
 };
 
 const permission_mw = (role) => (req, res, next) => {
+    console.log(req.decoded)
     if (req.decoded.role === role) {
         next();
         return;
