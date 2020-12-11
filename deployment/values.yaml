@@ -1,0 +1,4 @@
+name: authors
+port: 30002
+deployment:
+  replicas: 3
