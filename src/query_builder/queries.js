@@ -1,7 +1,7 @@
 
 const checkConnectionQuery = "DO 1"
 
-const addAuthorQuery = 'INSERT INTO authors (name) VALUES (?)'
+const addAuthorQuery = 'INSERT INTO authors (name, authId) VALUES (?, ?)'
 const deleteAuthorByIdQuery = 'DELETE FROM authors WHERE id = (?)'
 const getAuthorByIdQuery = 'SELECT * FROM authors WHERE id = (?)'
 const updateAuthorQuery = 'UPDATE authors SET ' +

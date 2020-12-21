@@ -1,25 +1,32 @@
-const authorDal = new (require('../dal/authors'))()
+const AuthorsDal = require('../dal/authors')
+const {sendEmail} = require("../queue/rabbit/producers/publish");
 
-class authorsLogic{
-    addAuthor({name}) {
-        return authorDal.addAuthor({name})
-    }
 
-    deleteAuthor(id) {
-        return authorDal.deleteAuthorById(id)
-    }
-
-    getAuthor(id) {
-        return authorDal.getAuthorById(id)
-    }
-
-    updateAuthor(id, author) {
-        return authorDal.updateAuthor(id, author)
-    }
-
-    getAuthors() {
-        return authorDal.getAuthors()
-    }
+async function addAuthor({name, author, email}) {
+    await AuthorsDal.addAuthor({name, authId: author})
+    sendEmail(email)
 }
 
-module.exports = authorsLogic
+function deleteAuthor(id) {
+    return AuthorsDal.deleteAuthorById(id)
+}
+
+function getAuthor(id) {
+    return AuthorsDal.getAuthorById(id)
+}
+
+function updateAuthor(id, author) {
+    return AuthorsDal.updateAuthor(id, author)
+}
+
+function getAuthors() {
+    return AuthorsDal.getAuthors()
+}
+
+module.exports = {
+    addAuthor,
+    deleteAuthor,
+    getAuthor,
+    updateAuthor,
+    getAuthors
+}

@@ -5,31 +5,41 @@ const {
     getAuthorByIdQuery,
     updateAuthorQuery,
     getAuthorsQuery,
+    checkConnectionQuery
 } = require("../query_builder/queries")
 
-class authorsDal {
-    async addAuthor({name}) {
-        const author = await pool.query(addAuthorQuery, [name])
-        return author[0].insertId
-    }
-
-    deleteAuthorById(id) {
-        return pool.query(deleteAuthorByIdQuery, [id])
-    }
-
-    async getAuthorById(id) {
-        const author = await pool.query(getAuthorByIdQuery, [id])
-        return author[0][0]
-    }
-
-    async updateAuthor(id, {name}) {
-        await pool.query(updateAuthorQuery, [name, id])
-    }
-
-    async getAuthors() {
-        const authors = await pool.query(getAuthorsQuery)
-        return authors[0]
-    }
+async function addAuthor({name, authId}) {
+    const author = await pool.query(addAuthorQuery, [name, authId])
+    return author[0].insertId
 }
 
-module.exports = authorsDal
+function deleteAuthorById(id) {
+    return pool.query(deleteAuthorByIdQuery, [id])
+}
+
+async function getAuthorById(id) {
+    const author = await pool.query(getAuthorByIdQuery, [id])
+    return author[0][0]
+}
+
+async function updateAuthor(id, {name}) {
+    await pool.query(updateAuthorQuery, [name, id])
+}
+
+async function getAuthors() {
+    const authors = await pool.query(getAuthorsQuery)
+    return authors[0]
+}
+
+function checkConnection() {
+    return pool.query(checkConnectionQuery)
+}
+
+module.exports = {
+    addAuthor,
+    deleteAuthorById,
+    getAuthorById,
+    updateAuthor,
+    getAuthors,
+    checkConnection
+}
