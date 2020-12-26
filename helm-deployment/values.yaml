@@ -2,7 +2,16 @@ name: authors
 port: 30002
 deployment:
   replicas: 3
+  env:
+    NOTIFY_QUEUE: "NOTIFY_QUEUE"
+    CREATE_AUTHOR_QUEUE: "CREATE_AUTHOR_QUEUE"
+    RABBIT_URL: "amqps://username1234:username1234@b-bad3cf75-a95d-46d0-bb3a-5d7b7c2756c0.mq.us-east-1.amazonaws.com:5671"
 
 authService: auth-service
-externals:
-  - /ping
+public:
+  - path: "/ping"
+    method: "GET"
+  - path: "/health"
+    method: "GET"
+  - path: "/api/author"
+    method: "GET"
