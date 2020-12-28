@@ -4,7 +4,7 @@ const {sendEmail} = require("../queue/rabbit/producers/publish");
 
 async function addAuthor({name, author, email}) {
     await AuthorsDal.addAuthor({name, authId: author})
-    sendEmail(email)
+    sendEmail(email, "Hello from Library.io, Thank you for sign-up")
 }
 
 function deleteAuthor(id) {
