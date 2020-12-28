@@ -6,7 +6,7 @@ const {
     updateAuthorQuery,
     getAuthorsQuery,
     checkConnectionQuery
-} = require("../query_builder/queries")
+} = require("./query_builder/queries")
 
 async function addAuthor({name, authId}) {
     const author = await pool.query(addAuthorQuery, [name, authId])
