@@ -18,10 +18,10 @@ public:
     id: "GET_HEALTH"
 
   - path: "/api/author/[a-z]*[^/]+$"
-    method: "POST"
+    method: "GET"
     id: "GET_AUTHOR"
     prefix: "~ ^"
 
   - path: "/api/author"
-    method: "POST"
+    method: "GET"
     id: "GET_AUTHORS"
