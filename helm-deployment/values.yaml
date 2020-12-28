@@ -11,7 +11,17 @@ authService: auth-service
 public:
   - path: "/ping"
     method: "GET"
+    id: "GET_PING"
+
   - path: "/health"
     method: "GET"
+    id: "GET_HEALTH"
+
+  - path: "/api/author/[a-z]*[^/]+$"
+    method: "POST"
+    id: "GET_AUTHOR"
+    prefix: "~ ^"
+
   - path: "/api/author"
-    method: "GET"
+    method: "POST"
+    id: "GET_AUTHORS"
